@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modeli.Korisnik;
+import modeli.Status;
 
 public class KorisnikRepozitorijum
 {
@@ -90,6 +91,7 @@ public class KorisnikRepozitorijum
 		List<Korisnik> korisnici = new ArrayList<Korisnik>();
 		prviProlaz(korisnici);
 		drugiProlaz(korisnici);
+		korisnici.removeIf(korisnik -> korisnik.getStatus()==Status.OBRISAN);
 		return korisnici;
 		
 	}
@@ -125,6 +127,7 @@ public class KorisnikRepozitorijum
 			{
 				System.out.println(linija);
 				unosServis.stringUkorisnikVeze(linija, korisnici);
+				
 			}
 			br.close();
 		}

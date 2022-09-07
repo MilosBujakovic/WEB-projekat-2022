@@ -43,7 +43,7 @@ public class UnosServis
 	{
 		String[] podaci = linija.split("\\|");
 		
-		for(Korisnik kor : korisnici)
+		for(Korisnik kor : korisnici) if(kor.getStatus() == Status.AKTIVAN)
 		{			
 			kor.setProfilneSlike(stringUprofilne(podaci[10], 1));
 			kor.setObjave(stringUobjave(podaci[11], 1));
@@ -73,14 +73,18 @@ public class UnosServis
 	private Objava stringUobjavu(String str, int nivoDelimitera)
 	{
 		String podaci[] = str.split(delimiteri[nivoDelimitera]);
-		Objava objava = new Objava();
-		objava.setId(Integer.parseInt(podaci[0]));
-		objava.setKorisnickoIme(podaci[1]);
-		objava.setStatus(Status.valueOf(podaci[2]));
-		objava.setSlika(podaci[3]);
-		objava.setTekst(podaci[4]);
-		objava.setKomentari(stringUkomentare(podaci[5], nivoDelimitera+1));
-		return objava;
+		if(Status.valueOf(podaci[2])==Status.AKTIVAN)
+		{
+			Objava objava = new Objava();
+			objava.setId(Integer.parseInt(podaci[0]));
+			objava.setKorisnickoIme(podaci[1]);
+			objava.setStatus(Status.valueOf(podaci[2]));
+			objava.setSlika(podaci[3]);
+			objava.setTekst(podaci[4]);
+			objava.setKomentari(stringUkomentare(podaci[5], nivoDelimitera+1));
+			return objava;
+		}
+		else return null;
 	}
 	
 	private List<ProfilnaSlika> stringUprofilne(String str, int nivoDelimitera)
@@ -97,14 +101,18 @@ public class UnosServis
 	public ProfilnaSlika stringUprofilnu(String str, int nivoDelimitera)
 	{
 		String podaci[] = str.split(delimiteri[nivoDelimitera]);
-		ProfilnaSlika profilna = new ProfilnaSlika();
-		profilna.setId(Integer.parseInt(podaci[0]));
-		profilna.setKorisnickoIme(podaci[1]);
-		profilna.setStatus(Status.valueOf(podaci[2]));
-		profilna.setLinkSlike(podaci[2]);
-		profilna.setOpis(podaci[3]);
-		profilna.setKomentari(stringUkomentare(podaci[4], nivoDelimitera+1));
-		return profilna;
+		if(Status.valueOf(podaci[2])==Status.AKTIVAN)
+		{
+			ProfilnaSlika profilna = new ProfilnaSlika();
+			profilna.setId(Integer.parseInt(podaci[0]));
+			profilna.setKorisnickoIme(podaci[1]);
+			profilna.setStatus(Status.valueOf(podaci[2]));
+			profilna.setLinkSlike(podaci[2]);
+			profilna.setOpis(podaci[3]);
+			profilna.setKomentari(stringUkomentare(podaci[4], nivoDelimitera+1));
+			return profilna;
+		}
+		return null;
 	}
 
 	private List<Komentar> stringUkomentare(String str, int nivoDelimitera)
@@ -114,14 +122,17 @@ public class UnosServis
 		for(String podatak : podaci)
 		{
 			String opaska[] = podatak.split(delimiteri[nivoDelimitera+1]);
-			Komentar komentar = new Komentar();
-			komentar.setId(Integer.parseInt(opaska[0]));
-			komentar.setKorisnickoIme(opaska[1]);
-			komentar.setStatus(Status.valueOf(podaci[2]));
-			komentar.setTekst(opaska[3]);
-			komentar.setDatumKomentara(opaska[4]);
-			komentar.setDatumIzmjene(opaska[5]);
-			komentari.add(komentar);
+			if(Status.valueOf(podaci[2])==Status.AKTIVAN)
+			{
+				Komentar komentar = new Komentar();
+				komentar.setId(Integer.parseInt(opaska[0]));
+				komentar.setKorisnickoIme(opaska[1]);
+				komentar.setStatus(Status.valueOf(podaci[2]));
+				komentar.setTekst(opaska[3]);
+				komentar.setDatumKomentara(opaska[4]);
+				komentar.setDatumIzmjene(opaska[5]);
+				komentari.add(komentar);
+			}
 		}
 		return komentari;
 	}
