@@ -1,23 +1,37 @@
 package modeli;
 
+import java.util.List;
+
 public class Komentar 
 {
 
-	private Korisnik korisnik;
+	private String korisnikckoIme;
 	private String tekst;
 	private String datumKomentara;
 	private String datumIzmjene;
 	
+	private long id;
+	
+	public long getId()
+	{
+		return id;
+	}
+	
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+	
 	public Komentar() {}
 
-	public Korisnik getKorisnik()
+	public String getKorisnickoIme()
 	{
-		return korisnik;
+		return korisnikckoIme;
 	}
 
-	public void setKorisnik(Korisnik korisnik)
+	public void setKorisnickoIme(String korisnikckoIme)
 	{
-		this.korisnik = korisnik;
+		this.korisnikckoIme = korisnikckoIme;
 	}
 
 	public String getTekst()
@@ -50,5 +64,6 @@ public class Komentar
 		this.datumIzmjene = datumIzmjene;
 	}
 	
+
 	
 }

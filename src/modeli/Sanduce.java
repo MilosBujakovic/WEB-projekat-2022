@@ -4,22 +4,35 @@ import java.util.List;
 
 public class Sanduce
 {
-	private Korisnik primalac;
-	private Korisnik posiljalac;
+	private long id;
+	private String primalac;
+	private String posiljalac;
 	private List<DirektnaPoruka> poruke;
-	public Korisnik getPrimalac()
+	
+	
+	
+	public long getId()
+	{
+		return id;
+	}
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+	
+	public String getPrimalac()
 	{
 		return primalac;
 	}
-	public void setPrimalac(Korisnik primalac)
+	public void setPrimalac(String primalac)
 	{
 		this.primalac = primalac;
 	}
-	public Korisnik getPosiljalac()
+	public String getPosiljalac()
 	{
 		return posiljalac;
 	}
-	public void setPosiljalac(Korisnik posiljalac)
+	public void setPosiljalac(String posiljalac)
 	{
 		this.posiljalac = posiljalac;
 	}
@@ -32,6 +45,6 @@ public class Sanduce
 		this.poruke = poruke;
 	}
 	
-	
+
 	
 }

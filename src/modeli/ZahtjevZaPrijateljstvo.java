@@ -1,26 +1,39 @@
 package modeli;
 
+import java.util.List;
+
 public class ZahtjevZaPrijateljstvo
 {
-	private Korisnik posiljalac;
-	private Korisnik primalac;
+	private String posiljalac;
+	private String primalac;
 	private StatusZahtjeva status;
 	private String datum;
 	
+	private long id;
 	
-	public Korisnik getPosiljalac()
+	public long getId()
+	{
+		return id;
+	}
+	
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+	
+	public String getPosiljalac()
 	{
 		return posiljalac;
 	}
-	public void setPosiljalac(Korisnik posiljalac)
+	public void setPosiljalac(String posiljalac)
 	{
 		this.posiljalac = posiljalac;
 	}
-	public Korisnik getPrimalac()
+	public String getPrimalac()
 	{
 		return primalac;
 	}
-	public void setPrimalac(Korisnik primalac)
+	public void setPrimalac(String primalac)
 	{
 		this.primalac = primalac;
 	}
@@ -40,6 +53,5 @@ public class ZahtjevZaPrijateljstvo
 	{
 		this.datum = datum;
 	}
-	
-	
+
 }
