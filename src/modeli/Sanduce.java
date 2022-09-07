@@ -9,7 +9,26 @@ public class Sanduce
 	private String posiljalac;
 	private List<DirektnaPoruka> poruke;
 	
+	private Status status;
 	
+	public Sanduce()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
 	
 	public long getId()
 	{

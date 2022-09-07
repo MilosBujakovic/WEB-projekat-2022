@@ -5,10 +5,31 @@ import java.util.List;
 public class Komentar 
 {
 
-	private String korisnikckoIme;
+	private String korisnickoIme;
 	private String tekst;
 	private String datumKomentara;
 	private String datumIzmjene;
+	private Status status;
+	
+	public Komentar()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
 	
 	private long id;
 	
@@ -22,16 +43,15 @@ public class Komentar
 		this.id = id;
 	}
 	
-	public Komentar() {}
 
 	public String getKorisnickoIme()
 	{
-		return korisnikckoIme;
+		return korisnickoIme;
 	}
 
-	public void setKorisnickoIme(String korisnikckoIme)
+	public void setKorisnickoIme(String korisnickoIme)
 	{
-		this.korisnikckoIme = korisnikckoIme;
+		this.korisnickoIme = korisnickoIme;
 	}
 
 	public String getTekst()

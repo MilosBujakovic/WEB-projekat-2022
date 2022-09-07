@@ -11,7 +11,26 @@ public class ProfilnaSlika
 	
 	private String korisnickoIme;
 	
+	private Status status;
 	
+	public ProfilnaSlika()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
 	
 	public String getKorisnickoIme()
 	{

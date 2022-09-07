@@ -19,6 +19,26 @@ public class Korisnik
 	private TipNaloga tipNaloga;
 	private List<Sanduce> inbox;
 	
+	private Status status;
+	
+	public Korisnik()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
 
 	public String getKorisnickoIme()
 	{

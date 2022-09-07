@@ -15,7 +15,7 @@ public class IspisServis
 	
 	public String korisnikZaUpis(Korisnik k, int nivoDelimitera)
 	{
-			return k.getKorisnickoIme() + delimiteri[nivoDelimitera] + k.getUloga() + delimiteri[nivoDelimitera] + k.getTipNaloga() + delimiteri[nivoDelimitera] + k.getLozinka()
+			return k.getKorisnickoIme()+ delimiteri[nivoDelimitera] + k.getStatus().toString() + delimiteri[nivoDelimitera] + k.getUloga() + delimiteri[nivoDelimitera] + k.getTipNaloga() + delimiteri[nivoDelimitera] + k.getLozinka()
 			+ delimiteri[nivoDelimitera] + k.getEmail() + delimiteri[nivoDelimitera] + k.getIme()	+ delimiteri[nivoDelimitera] + k.getPrezime() + delimiteri[nivoDelimitera] + k.getDatumRodjenja()
 			+ delimiteri[nivoDelimitera] + k.getPol()	+ delimiteri[nivoDelimitera] + profilneUstring(k.getProfilneSlike(), nivoDelimitera+1) + delimiteri[nivoDelimitera] + objaveUstring(k.getObjave(), nivoDelimitera+1)
 			+ delimiteri[nivoDelimitera] + zahtjeviUstring(k.getZahtjeviZaPrijateljstvo(), nivoDelimitera+1) + delimiteri[nivoDelimitera] + listaUstring(k.getListaPrijatelja(), nivoDelimitera+1)
@@ -51,9 +51,10 @@ public class IspisServis
 		
 	}
 	
-	public String sanduceUstring(Sanduce sanduce, int nivoDelimitera)
+	public String sanduceUstring(Sanduce sanduce, int nivoDelimitera) //TODO: dodati status
 	{
-		return sanduce.getId()+delimiteri[nivoDelimitera]+sanduce.getPosiljalac()+
+		return sanduce.getId()+ delimiteri[nivoDelimitera] + sanduce.getStatus().toString()
+		+delimiteri[nivoDelimitera]+sanduce.getPosiljalac()+
 		delimiteri[nivoDelimitera]+sanduce.getPrimalac()+delimiteri[nivoDelimitera]+
 		sanduce.getPoruke();
 	}
@@ -72,7 +73,8 @@ public class IspisServis
 	public String profilnaSlikaUstring(ProfilnaSlika profilna, int nivoDelimitera)
 	{
 		return profilna.getId()+delimiteri[nivoDelimitera]+
-		profilna.getKorisnickoIme()+delimiteri[nivoDelimitera]+profilna.getLinkSlike()+
+		profilna.getKorisnickoIme()+ delimiteri[nivoDelimitera] + profilna.getStatus().toString()+
+		delimiteri[nivoDelimitera]+profilna.getLinkSlike()+
 		delimiteri[nivoDelimitera]+profilna.getOpis()+delimiteri[nivoDelimitera]+
 		komentariUstring(profilna.getKomentari(), nivoDelimitera+1);
 	}
@@ -91,12 +93,13 @@ public class IspisServis
 	public String objavaUstring(Objava objava, int nivoDelimitera)
 	{
 		return objava.getId()+delimiteri[nivoDelimitera]+
-				objava.getKorisnickoIme()+delimiteri[nivoDelimitera]+objava.getSlika()+
+				objava.getKorisnickoIme()+ delimiteri[nivoDelimitera] + objava.getStatus().toString()
+				+delimiteri[nivoDelimitera]+objava.getSlika()+
 				delimiteri[nivoDelimitera]+objava.getTekst()+delimiteri[nivoDelimitera]+
 				komentariUstring(objava.getKomentari(), nivoDelimitera+1);
 	}
 	
-	public String korisniciUstring(List<Korisnik> lista, int nivoDelimitera)
+	public String prijateljiUstring(List<Korisnik> lista, int nivoDelimitera)
 	{
 		String izlaz="";
 		for(Korisnik k : lista)
@@ -122,7 +125,8 @@ public class IspisServis
 	public String komentarUstring(Komentar komentar, int nivoDelimitera)
 	{
 		return komentar.getId()+delimiteri[nivoDelimitera]+
-				komentar.getKorisnickoIme()+delimiteri[nivoDelimitera]+komentar.getTekst()+
+				komentar.getKorisnickoIme()+ delimiteri[nivoDelimitera] + komentar.getStatus().toString()
+				+delimiteri[nivoDelimitera]+komentar.getTekst()+
 				delimiteri[nivoDelimitera]+komentar.getDatumKomentara()+delimiteri[nivoDelimitera]+
 				komentar.getDatumIzmjene();
 	}

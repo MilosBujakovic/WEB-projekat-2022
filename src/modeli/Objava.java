@@ -12,7 +12,26 @@ public class Objava
 	private long id;
 	private String korisnickoIme;
 	
+	private Status status;
 	
+	public Objava()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
 	
 	public String getKorisnickoIme()
 	{

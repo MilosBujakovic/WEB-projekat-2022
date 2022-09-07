@@ -8,6 +8,7 @@ import modeli.Korisnik;
 import modeli.Objava;
 import modeli.ProfilnaSlika;
 import modeli.Sanduce;
+import modeli.Status;
 import modeli.StatusZahtjeva;
 import modeli.TipNaloga;
 import modeli.Uloga;
@@ -22,14 +23,15 @@ public class UnosServis
 		String[] podaci = linija.split("\\|");
 		Korisnik kor = new Korisnik();
 		kor.setKorisnickoIme(podaci[0]);
-		kor.setUloga(Uloga.valueOf(podaci[1]));
-		kor.setTipNaloga(TipNaloga.valueOf(podaci[2]));
-		kor.setLozinka(podaci[3]);
-		kor.setEmail(podaci[4]);
-		kor.setIme(podaci[5]);
-		kor.setPrezime(podaci[6]);
-		kor.setDatumRodjenja(podaci[7]);
-		kor.setPol(podaci[8]);
+		kor.setStatus(Status.valueOf(podaci[1]));
+		kor.setUloga(Uloga.valueOf(podaci[2]));
+		kor.setTipNaloga(TipNaloga.valueOf(podaci[3]));
+		kor.setLozinka(podaci[4]);
+		kor.setEmail(podaci[5]);
+		kor.setIme(podaci[6]);
+		kor.setPrezime(podaci[7]);
+		kor.setDatumRodjenja(podaci[8]);
+		kor.setPol(podaci[9]);
 		
 		//+ "|" + profilneUstring(k.getProfilneSlike()) + "|" + objaveUstring(k.getObjave())
 		//+ "|" + zahtjeviUstring(k.getZahtjeviZaPrijateljstvo()) + "|" + korisniciUstring(k.getListaPrijatelja())
@@ -43,10 +45,10 @@ public class UnosServis
 		
 		for(Korisnik kor : korisnici)
 		{			
-			kor.setProfilneSlike(stringUprofilne(podaci[9], 1));
-			kor.setObjave(stringUobjave(podaci[10], 1));
-			kor.setZahtjeviZaPrijateljstvo(stringUzahtjeve(podaci[11], 1));
-			kor.setInbox(stringUsanducad(podaci[12], 1));
+			kor.setProfilneSlike(stringUprofilne(podaci[10], 1));
+			kor.setObjave(stringUobjave(podaci[11], 1));
+			kor.setZahtjeviZaPrijateljstvo(stringUzahtjeve(podaci[12], 1));
+			kor.setInbox(stringUsanducad(podaci[13], 1));
 		}
 		
 		//+ "|" + profilneUstring(k.getProfilneSlike()) + "|" + objaveUstring(k.getObjave())
@@ -74,9 +76,10 @@ public class UnosServis
 		Objava objava = new Objava();
 		objava.setId(Integer.parseInt(podaci[0]));
 		objava.setKorisnickoIme(podaci[1]);
-		objava.setSlika(podaci[2]);
-		objava.setTekst(podaci[3]);
-		objava.setKomentari(stringUkomentare(podaci[4], nivoDelimitera+1));
+		objava.setStatus(Status.valueOf(podaci[2]));
+		objava.setSlika(podaci[3]);
+		objava.setTekst(podaci[4]);
+		objava.setKomentari(stringUkomentare(podaci[5], nivoDelimitera+1));
 		return objava;
 	}
 	
@@ -97,6 +100,7 @@ public class UnosServis
 		ProfilnaSlika profilna = new ProfilnaSlika();
 		profilna.setId(Integer.parseInt(podaci[0]));
 		profilna.setKorisnickoIme(podaci[1]);
+		profilna.setStatus(Status.valueOf(podaci[2]));
 		profilna.setLinkSlike(podaci[2]);
 		profilna.setOpis(podaci[3]);
 		profilna.setKomentari(stringUkomentare(podaci[4], nivoDelimitera+1));
@@ -113,9 +117,10 @@ public class UnosServis
 			Komentar komentar = new Komentar();
 			komentar.setId(Integer.parseInt(opaska[0]));
 			komentar.setKorisnickoIme(opaska[1]);
-			komentar.setTekst(opaska[2]);
-			komentar.setDatumKomentara(opaska[3]);
-			komentar.setDatumIzmjene(opaska[4]);
+			komentar.setStatus(Status.valueOf(podaci[2]));
+			komentar.setTekst(opaska[3]);
+			komentar.setDatumKomentara(opaska[4]);
+			komentar.setDatumIzmjene(opaska[5]);
 			komentari.add(komentar);
 		}
 		return komentari;
