@@ -11,12 +11,22 @@
 
 <body>
 	<div id="app" class="container mx-auto py-6">
-		<div class="content">
-			
-		</div>
+		<table class="blueTable">
+        <thead >
+        <tr>
+            <th>#</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="korisnik in korisnici" :key="korisnik.korisnickoIme">
+            <td>{{korisnik.korisnickoIme}}</td>
+        </tr>
+        </tbody>
+    </table>
 	</div>
 
-	<script src="https://unpkg.com/vue@3"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 	<script src="index.js"></script>
 </body>
 
