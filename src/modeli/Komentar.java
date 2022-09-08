@@ -1,23 +1,57 @@
 package modeli;
 
+import java.util.List;
+
 public class Komentar 
 {
 
-	private Korisnik korisnik;
+	private String korisnickoIme;
 	private String tekst;
 	private String datumKomentara;
 	private String datumIzmjene;
+	private Status status;
 	
-	public Komentar() {}
-
-	public Korisnik getKorisnik()
+	public Komentar()
 	{
-		return korisnik;
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	
+	public Status getStatus()
+	{
+		return status;
 	}
 
-	public void setKorisnik(Korisnik korisnik)
+	public void setStatus(Status status)
 	{
-		this.korisnik = korisnik;
+		this.status = status;
+	}
+	
+	private long id;
+	
+	public long getId()
+	{
+		return id;
+	}
+	
+	public void setId(long id)
+	{
+		this.id = id;
+	}
+	
+
+	public String getKorisnickoIme()
+	{
+		return korisnickoIme;
+	}
+
+	public void setKorisnickoIme(String korisnickoIme)
+	{
+		this.korisnickoIme = korisnickoIme;
 	}
 
 	public String getTekst()
@@ -50,5 +84,6 @@ public class Komentar
 		this.datumIzmjene = datumIzmjene;
 	}
 	
+
 	
 }

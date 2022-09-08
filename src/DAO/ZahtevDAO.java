@@ -26,7 +26,7 @@ public class ZahtevDAO {
 		List<ZahtjevZaPrijateljstvo> zahteviKorisnika = new ArrayList<ZahtjevZaPrijateljstvo>();
 		for (ZahtjevZaPrijateljstvo zahtjevZaPrijateljstvo : zahtevi) {
 			if (zahtjevZaPrijateljstvo.getStatus().equals(StatusZahtjeva.CEKANJE))
-				if (zahtjevZaPrijateljstvo.getPrimalac().getKorisnickoIme().equals(korisnickoIme))
+				if (zahtjevZaPrijateljstvo.getPrimalac().equals(korisnickoIme))
 					zahteviKorisnika.add(zahtjevZaPrijateljstvo);
 		}
 		return zahteviKorisnika;

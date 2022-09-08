@@ -15,11 +15,31 @@ public class Korisnik
 	private List<ProfilnaSlika> profilneSlike;
 	private List<Objava> objave;
 	private List<ZahtjevZaPrijateljstvo> zahtjeviZaPrijateljstvo;
-	private List<Korisnik> listaPrijatelja;
+	private List<String> listaPrijatelja;
 	private TipNaloga tipNaloga;
 	private List<Sanduce> inbox;
 	
+	private Status status;
 	
+	public Korisnik()
+	{
+		status = Status.AKTIVAN;
+	}
+	
+	public void obrisi()
+	{
+		this.status = Status.OBRISAN;
+	}
+	public Status getStatus()
+	{
+		return status;
+	}
+
+	public void setStatus(Status status)
+	{
+		this.status = status;
+	}
+
 	public String getKorisnickoIme()
 	{
 		return korisnickoIme;
@@ -108,11 +128,11 @@ public class Korisnik
 	{
 		this.zahtjeviZaPrijateljstvo = zahtjeviZaPrijateljstvo;
 	}
-	public List<Korisnik> getListaPrijatelja()
+	public List<String> getListaPrijatelja()
 	{
 		return listaPrijatelja;
 	}
-	public void setListaPrijatelja(List<Korisnik> listaPrijatelja)
+	public void setListaPrijatelja(List<String> listaPrijatelja)
 	{
 		this.listaPrijatelja = listaPrijatelja;
 	}
@@ -134,6 +154,9 @@ public class Korisnik
 	}
 	
 	
+
+
+
 	
 	
 }
