@@ -1,8 +1,8 @@
-const app = Vue.createApp({
-	data() {
-		return {
-			name: ''
-		}
-	}
+const store = new Vuex.Store({})
+
+const app = new Vue({
+    el: '#app',
+    store,
+    data: {
+    }
 })
-.mount('#app')
