@@ -16,22 +16,17 @@ import modeli.Status;
 
 public class KorisnikRepozitorijum
 {
-	Map<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
 	
-	public KorisnikRepozitorijum(String contextPath) {
-		List<Korisnik> kor = this.findAll();
-		for (Korisnik korisnik : kor) {
-			korisnici.put(korisnik.getKorisnickoIme(), korisnik);
-		}
+	public KorisnikRepozitorijum() {
 	}
 	
 	IspisServis ispisServis;
 	UnosServis unosServis;
 	
-	public Korisnik save(Korisnik korisnik)
+	public Korisnik save(Korisnik korisnik, String contextPath)
 	{
 	  try {
-	      File fajl = new File("filename.txt");
+	      File fajl = new File(contextPath + "/korisnici.txt");
 	      if (fajl.createNewFile()) 
 	      {
 	        System.out.println("File created: " + fajl.getName());
@@ -56,11 +51,11 @@ public class KorisnikRepozitorijum
 		return korisnik;
 	}
 	
-	public List<Korisnik> saveAll(List<Korisnik> korisnici)
+	public List<Korisnik> saveAll(List<Korisnik> korisnici, String contextPath)
 	{
 		try 
 		{
-		      File fajl = new File("korisnici.txt");
+		      File fajl = new File(contextPath + "/korisnici.txt");
 		      if (fajl.createNewFile()) 
 		      {
 		        System.out.println("File created: " + fajl.getName());
@@ -72,7 +67,7 @@ public class KorisnikRepozitorijum
 		      for(Korisnik korisnik : korisnici)
 		      {
 			      
-			      save(korisnik);
+			      save(korisnik, contextPath);
 			      System.out.println("Korisnik upisan!");
 		      }
 	    }
@@ -84,9 +79,9 @@ public class KorisnikRepozitorijum
 		return korisnici;
 	}
 	
-	public Korisnik findByKorisnickoIme(String korisnickoIme)
+	public Korisnik findByKorisnickoIme(String korisnickoIme, String contextPath)
 	{
-		List<Korisnik> korisnici = this.findAll();
+		List<Korisnik> korisnici = this.findAll(contextPath);
 			
 		for(Korisnik k : korisnici)
 		{
@@ -96,21 +91,23 @@ public class KorisnikRepozitorijum
 		return null;
 	}
 	
-	public List<Korisnik> findAll()
+	public List<Korisnik> findAll(String contextPath)
 	{
+		System.out.println(contextPath);
 		List<Korisnik> korisnici = new ArrayList<Korisnik>();
-		prviProlaz(korisnici);
-		drugiProlaz(korisnici);
+		prviProlaz(korisnici, contextPath);
+		drugiProlaz(korisnici, contextPath);
 		korisnici.removeIf(korisnik -> korisnik.getStatus()==Status.OBRISAN);
+		System.out.println(korisnici);
 		return korisnici;
 		
 	}
 	
-	public List<Korisnik> prviProlaz(List<Korisnik> korisnici)
+	public List<Korisnik> prviProlaz(List<Korisnik> korisnici, String contextPath)
 	{
 		try
 		{
-			BufferedReader br = new BufferedReader(new FileReader("korisnici.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(contextPath + "/korisnici.txt"));
 			String linija;
 			while((linija = br.readLine()) !=null)
 			{
@@ -127,11 +124,11 @@ public class KorisnikRepozitorijum
 		return korisnici;
 	}
 	
-	public List<Korisnik> drugiProlaz(List<Korisnik> korisnici)
+	public List<Korisnik> drugiProlaz(List<Korisnik> korisnici, String contextPath)
 	{
 		try
 		{
-			BufferedReader br = new BufferedReader(new FileReader("korisnici.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(contextPath + "/korisnici.txt"));
 			String linija;
 			while((linija = br.readLine()) !=null)
 			{

@@ -1,5 +1,7 @@
 package servisi;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,9 @@ import repozitorijumi.KorisnikRepozitorijum;
 public class LoginServis {
 	@Context
 	ServletContext ctx;
+	String contextPath = ctx.getRealPath("");
+	
+	KorisnikRepozitorijum korisnikRepozitorijum;
 	
 	public LoginServis() {
 		
@@ -27,11 +32,18 @@ public class LoginServis {
 	
 	@PostConstruct
 	public void init() {
+		System.out.println(contextPath);
 		if (ctx.getAttribute("korisnikRepo") == null) {
-	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
+			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum());
 		}
 	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Korisnik> getAll() {
+		System.out.println(contextPath);
+        return korisnikRepozitorijum.findAll(contextPath);
+    }
 	
 	@POST
 	@Path("/login")
@@ -39,7 +51,7 @@ public class LoginServis {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
 		KorisnikRepozitorijum korisnikRepo = (KorisnikRepozitorijum) ctx.getAttribute("korisnikRepo");
-		Korisnik logovani = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
+		Korisnik logovani = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme(), contextPath);
 		if (logovani != null) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}

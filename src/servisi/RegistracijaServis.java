@@ -19,6 +19,7 @@ import repozitorijumi.KorisnikRepozitorijum;
 public class RegistracijaServis {
 	@Context
 	ServletContext ctx;
+	String contextPath = ctx.getRealPath("");
 
 	public RegistracijaServis() {
 
@@ -27,8 +28,7 @@ public class RegistracijaServis {
 	@PostConstruct
 	public void init() {
 		if (ctx.getAttribute("korisnikRepo") == null) {
-			String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
+			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum());
 		}
 	}
 
@@ -38,13 +38,12 @@ public class RegistracijaServis {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
 		KorisnikRepozitorijum korisnikRepo = (KorisnikRepozitorijum) ctx.getAttribute("korisnikRepo");
-		Korisnik novi = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
+		Korisnik novi = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme(), contextPath);
 		if (novi != null) {
 			return Response.status(0).entity("Vec postojeci korisnik").build();
 		}
-		korisnikRepo.save(korisnik);
-		String contextPath = ctx.getRealPath("");
-		ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
+		korisnikRepo.save(korisnik, contextPath);
+		ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum());
 		return Response.status(200).build();
 	}
 
