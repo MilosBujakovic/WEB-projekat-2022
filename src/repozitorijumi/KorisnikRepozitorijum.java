@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.WebApplicationException;
+
 import modeli.Korisnik;
 import modeli.Status;
 
@@ -77,13 +79,14 @@ public class KorisnikRepozitorijum
 	public Korisnik findByKorisnickoIme(String korisnickoIme)
 	{
 		List<Korisnik> korisnici = this.findAll();
-			
+		Korisnik kor = null;	
 		for(Korisnik k : korisnici)
 		{
-			if(k.getKorisnickoIme().equals(korisnickoIme)) return k;
+			if(k.getKorisnickoIme().equals(korisnickoIme)) kor = k;
 			else continue;
 		}
-		return null;
+		if(kor==null) throw new WebApplicationException("Korisnik ne postoji!", 404);
+		return kor;
 	}
 	
 	public List<Korisnik> findAll()
