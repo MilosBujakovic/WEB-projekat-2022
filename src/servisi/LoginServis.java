@@ -12,8 +12,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import DAO.KorisnikDAO;
 import modeli.Korisnik;
+import repozitorijumi.KorisnikRepozitorijum;
 
 // Login
 @Path("")
@@ -27,9 +27,9 @@ public class LoginServis {
 	
 	@PostConstruct
 	public void init() {
-		if (ctx.getAttribute("korisnikDAO") == null) {
+		if (ctx.getAttribute("korisnikRepo") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("korisnikDAO", new KorisnikDAO(contextPath));
+			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
 		}
 	}
 	
@@ -38,8 +38,8 @@ public class LoginServis {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
-		KorisnikDAO korisnikDao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		Korisnik logovani = korisnikDao.find(korisnik.getKorisnickoIme(), korisnik.getLozinka());
+		KorisnikRepozitorijum korisnikRepo = (KorisnikRepozitorijum) ctx.getAttribute("korisnikRepo");
+		Korisnik logovani = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		if (logovani != null) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}

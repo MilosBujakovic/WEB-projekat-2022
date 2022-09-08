@@ -7,13 +7,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modeli.Korisnik;
 import modeli.Status;
 
 public class KorisnikRepozitorijum
 {
+	Map<String, Korisnik> korisnici = new HashMap<String, Korisnik>();
+	
+	public KorisnikRepozitorijum(String contextPath) {
+		List<Korisnik> kor = this.findAll();
+		for (Korisnik korisnik : kor) {
+			korisnici.put(korisnik.getKorisnickoIme(), korisnik);
+		}
+	}
 	
 	IspisServis ispisServis;
 	UnosServis unosServis;

@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import DAO.KorisnikDAO;
 import modeli.Korisnik;
+import repozitorijumi.KorisnikRepozitorijum;
 
 @Path("")
 public class RegistracijaServis {
@@ -25,9 +26,9 @@ public class RegistracijaServis {
 
 	@PostConstruct
 	public void init() {
-		if (ctx.getAttribute("korisnikDAO") == null) {
+		if (ctx.getAttribute("korisnikRepo") == null) {
 			String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("korisnikDAO", new KorisnikDAO(contextPath));
+			ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
 		}
 	}
 
@@ -36,13 +37,14 @@ public class RegistracijaServis {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
-		KorisnikDAO korisnikDao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		Korisnik novi = korisnikDao.find(korisnik.getKorisnickoIme(), korisnik.getLozinka());
+		KorisnikRepozitorijum korisnikRepo = (KorisnikRepozitorijum) ctx.getAttribute("korisnikRepo");
+		Korisnik novi = korisnikRepo.findByKorisnickoIme(korisnik.getKorisnickoIme());
 		if (novi != null) {
 			return Response.status(0).entity("Vec postojeci korisnik").build();
 		}
-		korisnikDao.dodajKorisnika(korisnik);
-		ctx.setAttribute("korisnikDAO", korisnikDao);
+		korisnikRepo.save(korisnik);
+		String contextPath = ctx.getRealPath("");
+		ctx.setAttribute("korisnikRepo", new KorisnikRepozitorijum(contextPath));
 		return Response.status(200).build();
 	}
 
